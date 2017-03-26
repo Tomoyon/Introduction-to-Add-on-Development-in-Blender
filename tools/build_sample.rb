@@ -1,14 +1,14 @@
 require 'fileutils'
 
 if ARGV.size != 2 then
-    puts("Usage: build_sample.rb <source> <target>")
+    puts "Usage: build_sample.rb <source> <target>"
 end
 
 raw_path = ARGV[0]
 target_path = ARGV[1]
 
 filelist = []
-entry = Dir.glob(raw_path + '**/**', File::FNM_DOTMATCH)
+entry = Dir.glob(raw_path + '/**/**', File::FNM_DOTMATCH)
 entry.each {|e|
     next e if File::ftype(e) == 'directory'
     filelist.push(e)
@@ -28,6 +28,7 @@ filelist.each {|filepath|
         next line if /^\s*\/\/! \[.*\]/ =~ line
         dest_file.puts(line)
     end
+    puts filepath + " -> " + target_path + path
 }
 
 exit 0
