@@ -1,7 +1,11 @@
 require 'fileutils'
 
-raw_path = 'sample_raw/'
-target_path = 'sample/'
+if ARGV.size != 2 then
+    puts("Usage: build_sample.rb <source> <target>")
+end
+
+raw_path = ARGV[0]
+target_path = ARGV[1]
 
 filelist = []
 entry = Dir.glob(raw_path + '**/**', File::FNM_DOTMATCH)
