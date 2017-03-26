@@ -428,18 +428,6 @@ class Test_Sample_3_10(TestBase):
         pass
 
 
-class Test_Sample_4_2(TestBase):
-
-    modname = 'debugee'
-    idname = [
-        ('OPERATOR', 'object.debug_test')
-    ]
-
-    def test_addon(self):
-        result = bpy.ops.object.debug_test()
-        self.assertSetEqual(result, {'FINISHED'})
-
-
 class Test_Sample_4_5(TestBase):
 
     modname = 'testee'
@@ -542,7 +530,6 @@ if __name__ == "__main__":
         Test_Sample_3_8,
         Test_Sample_3_9,
         Test_Sample_3_10,
-        Test_Sample_4_2,
         Test_Sample_4_5,
         Test_Sample_5_1,
         Test_Sample_5_2,
