@@ -226,6 +226,12 @@ Blenderのリポジトリを取得します。
 |Release|```git://git.blender.org/blender-addons.git```|
 |Contrib|```git://git.blender.org/blender-addons-contrib.git```|
 
+
+<div id="tips"></div>
+
+サポートレベルがReleaseとして登録されるアドオンは、アドオンがすでに完成していてすぐにでもBlenderに取り込むべきものであると判断された場合です。一方サポートレベルがContribは、レビュー時に開発中のアドオンである場合やアドオンの有用度をユーザに判断を仰ぎたい場合に登録されます。
+
+
 <div id="process_title"></div>
 
 ##### Work
@@ -470,13 +476,61 @@ Blender本体にアドオンが取り込まれるとユーザも増えますの�
 
 宣伝も含めて、開発したアドオンのサポートページを作成しましょう。サポートページは、[4-3節](03_Publish_your_Add-on.md) で紹介した方法で開設すると良いと思います。
 
-### サポートレベル Release への審査
+## サポートレベル　Contrib から Release へ
 
-もしアドオンのレビューの結果、サポートレベルContribとしてアドオンを登録することになった場合、ユーザへの要望を聞いてアドオンを継続的に改良することによって、サポートレベルをReleaseに上げることができるかもしれません。
+アドオンのレビューの結果、サポートレベルContribとしてアドオンを登録することになった場合、レビューを依頼することでReleaseレベルへサポートレベルを上げることができます。
 
-ContribからReleaseへサポートレベルを上げるための審査は、Blenderのメーリングリストbf-python(bf-python@blender.org)へメールを出すことで申請できます。
+ContribからReleaseへサポートレベルを上げるためには、例えば以下の方法があります。なお、筆者が開発しているアドオン『Magic UV』は、Blender 2.79に登録すべきアドオンをBlender Artistsでユーザから募集しているときに、ユーザから推薦いただいたのがきっかけとなり、Blenderのアドオン開発代表者であるMeta-Androcto氏からReleaseレベルに招待をいただきました。
+
+* Blenderのアドオン関係のメーリングリストbf-python(bf-python@blender.org)へReleaseサポートレベルへのレビュー申請メールを出し、ユーザの判断を仰ぐ
+* Blenderの新バージョンをリリースする時に、Blenderのアドオン開発代表者（Meta-Androcto氏など）から招待を受ける
+* ユーザからReleaseレベルへの推薦を受ける
+
+このように、アドオンのサポートレベルをReleaseに上げるためには、ユーザからアドオンに対して一定の支持を受ける必要があります。ユーザからアドオンに対して支持を受けるために確実な方法はありませんが、Releaseのサポートレベルとして登録されたアドオンを見てみると、以下のようなアドオンが登録されているように思えます。
+
+* アドオンの機能が優れていて、かつ完成している
+  * ここで優れているとは、既存の機能の組み合わせによる改良ではなくBlenderに新たな機能を提供してくれるアドオンを指す
+* ユーザが多く、アドオンの機能が有用であると評価を多数もらっている
+  * 開発代表者は海外の方が多いので、海外ユーザが多いほうが開発代表者の目にとまりやすいという意味では海外ユーザが多い方が良いです
+* 積極的にユーザからの意見（機能追加リクエスト、バグ報告）を聞き、アドオンの改良を続けている
+  * Releaseレベルのアドオンは、Contribレベルに比べて多くのユーザに使ってもらうことになるため、開発が継続して行われ将来にわたってきちんと動作することが約束できるアドオンが望まれているようです
+
+### Releaseリポジトリへの登録手順
+
+基本的にcontribと同じで、リポジトリのあて先が異なるだけ。
+
+
+Release Noteを書く必要がある。
+Wikiページは必ず必要。
+D.B.Oにスレッドをたててもらう
+
+releaseの場合
+
+```sh
+git clone git://git.blender.org/blender-addons.git
+cd blender-addons
+$ git submodule update --init --recursive
+$ git submodule foreach --recursive git checkout master
+$ git submodule foreach --recursive git pull --rebase origin master
+$ git pull --rebase
+$ git submodule foreach --recursive git pull --rebase origin master
+```
+
+```sh
+git config --global user.name "[名前（ニックネーム可）]"
+git config --global user.email "[連絡先メールアドレス]"
+```
+
+git remote set-url origin git@git.blender.org:blender-addons.git
+
+https://wiki.blender.org/index.php/Dev:Doc/Process/Addons
+
+
+### Releaseレベルへの登録に当たって注意したいこと
 
 サポートレベルがReleaseのアドオンはBlender本体と一緒に提供されるため、サポートレベルがContribのアドオンに比べてユーザが多くなるメリットがあります。しかしサポートレベルがReleaseになるとレビューがより一層厳しくなるため、機能追加を容易に行うことができないというデメリットもあります。このようにサポートレベルによってメリット・デメリットがありますので、よく考えてからレビュー依頼を出すようにしましょう。
+
+
 
 ## まとめ
 
