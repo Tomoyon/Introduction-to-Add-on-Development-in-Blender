@@ -48,6 +48,7 @@ class DrawObjectTrajectory(bpy.types.Operator):
             )
             DrawObjectTrajectory.__handle = None
 
+//! [get_region_space]
     @staticmethod
     def __get_region_space(context, area_type, region_type, space_type):
         region = None
@@ -73,6 +74,7 @@ class DrawObjectTrajectory(bpy.types.Operator):
                 break
 
         return (region, space)
+//! [get_region_space]
 
     @staticmethod
     def __render(context):
