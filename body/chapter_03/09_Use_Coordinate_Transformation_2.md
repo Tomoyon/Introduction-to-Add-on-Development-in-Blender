@@ -146,7 +146,7 @@
 
 第1引数と第2引数は [3-8節](08_Use_Coordinate_Transformation_1.md) で紹介した ```view3d_utils.location_3d_to_region_2d()``` 関数と同じものを指定しますが、第3引数にはリージョン座標を指定することに注意してください。
 
-[3-8節](08_Use_Coordinate_Transformation_1.md) と同様、引数に指定するリージョン情報とスペース情報は ```get_region_space()``` スタティックメソッドで取得します。```get_region_space()``` スタティックメソッドで行っている処理について知りたい方は、[3-5節](05_Render_String_with_blf_Module.md) や [3-8節](08_Use_Coordinate_Transformation_1.md) を参照してください。
+これらの引数に指定するリージョン情報とスペース情報は、```SelectObjectOnMouseover.__get_region_space()``` スタティックメソッドで取得します。```SelectObjectOnMouseover.__get_region_space()``` スタティックメソッドで行っている処理について知りたい方は、[3-5節](05_Render_String_with_blf_Module.md) や [3-8節](08_Use_Coordinate_Transformation_1.md) を参照してください。
 
 
 #### 3. レイの始点と終点の座標を求める
@@ -231,7 +231,7 @@ for o in objs:
 
 #### 5. レイと交差したオブジェクトを選択する
 
-最後に、```__intersected_objs``` インスタンス変数変数に保存されたレイと交差したオブジェクトを選択します。
+最後に、インスタンス変数 ```__intersected_objs``` に保存されたレイと交差したオブジェクトを選択します。
 
 [import:"select_object", unindent:"true"](../../sample_raw/src/chapter_03/sample_3_9.py)
 
@@ -252,7 +252,7 @@ for o in objs:
 リージョン座標 = ビューポート変換行列 × 射影変換行列 × ビュー変換行列 × グローバル座標変換行列 × ローカル座標
 ```
 
-スクリプトは座標変換を行う前にリージョン情報やスペース情報を取得する必要があります。リージョン情報やスペース情報の取得は ```get_region_and_space()``` 関数で行います。```get_region_and_space()``` 関数については、本節のサンプル ```sample_3_9.py``` の ```SelectObjectOnMouseover.__get_region_space()``` スタティックメソッドの説明を参照してください。第1引数の ```context``` を使ってエリア情報を取得するか ```bpy.context``` を使ってエリア情報を取得するかの違いしかありませんので、特に困ることはないと思います。ここで仮に ```get_region_and_space()``` 関数の戻り値の第3引数（スペース情報）が ```None``` を返した時（指定したスペース情報が存在しなかった場合）は座標変換することができなくなるため、何もせずにプログラムの実行を終了します。
+スクリプトは座標変換を行う前にリージョン情報やスペース情報を取得する必要があります。リージョン情報やスペース情報の取得は ```get_region_and_space()``` 関数で行います。```get_region_and_space()``` 関数については、本節のサンプル ```sample_3_9.py``` の ```SelectObjectOnMouseover.__get_region_space()``` スタティックメソッドの説明を参照してください。第1引数の ```context``` を使ってエリア情報を取得するか ```bpy.context``` を使ってエリア情報を取得するかの違いしかありません。ここで、仮に ```get_region_and_space()``` 関数の戻り値の第3引数（スペース情報）が ```None``` を返した時（指定したスペース情報が存在しなかった場合）は座標変換することができなくなるため、何もせずにプログラムの実行を終了します。
 
 リージョン情報とスペース情報を取得をした後、以下の順番で座標変換を行ないます。
 
