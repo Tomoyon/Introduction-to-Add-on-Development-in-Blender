@@ -34,7 +34,7 @@
 
 <div id="sidebyside"></div>
 
-|*3Dビュー* エリア上で *N* キーを押してプロパティパネルを表示し、項目 *マウスの右クリックで面を削除* が追加されていることを確認します。|![マウスの右クリックで面を削除 手順1](https://dl.dropboxusercontent.com/s/6pyxmbf4mak9o8j/use_add-on_1.png "マウスの右クリックで面を削除 手順1")|
+|*3Dビュー* エリア上で *N* キーを押してプロパティパネルを表示し、項目 *マウスの右クリックで面を削除* が追加されていることを確認します。|![マウスの右クリックで面を削除 有効化](https://dl.dropboxusercontent.com/s/6pyxmbf4mak9o8j/enable_add-on_1.png "マウスの右クリックで面を削除 有効化")|
 |---|---|
 
 
@@ -48,8 +48,9 @@
 
 <div id="process_noimg"></div>
 
-|<div id="box">1</div>|*3Dビュー* エリア上で *編集モード* に変更し、選択方法を面選択にします。|
-|---|---|
+|<div id="box">1</div>|*3Dビュー* エリア上で *編集モード* に変更し、選択方法を面選択にします。|![マウスの右クリックで面を削除 手順1](https://dl.dropboxusercontent.com/s/1glnrvwsysrjxcs/use_add-on_1.png "マウスの右クリックで面を削除 手順1")|
+|---|---|---|
+
 
 <div id="process_sep"></div>
 

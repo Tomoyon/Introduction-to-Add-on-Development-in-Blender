@@ -45,7 +45,7 @@
 
 <div id="sidebyside"></div>
 
-|プロパティパネルを表示し、項目 *マウスの右クリックで面を削除* が追加されていることを確認します。|![3-2節 アドオン有効化](https://dl.dropboxusercontent.com/s/sgjvumciomz3uh4/enable_add-on.png "3-2節 アドオン有効化")|
+|プロパティパネルを表示し、項目 *オブジェクト並進移動モード* が追加されていることを確認します。|![3-2節 アドオン有効化](https://dl.dropboxusercontent.com/s/sgjvumciomz3uh4/enable_add-on.png "3-2節 アドオン有効化")|
 |---|---|
 
 

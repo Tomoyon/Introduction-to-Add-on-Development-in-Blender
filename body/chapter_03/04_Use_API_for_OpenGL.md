@@ -53,8 +53,9 @@ OpenGLを使って図形の描画方法を理解するため、次の仕様の�
 
 <div id="sidebyside"></div>
 
-|プロパティパネルを表示し、項目 *図形を表示* が追加されていることを確認します。|![図の表示 手順1](https://dl.dropboxusercontent.com/s/uf0xneikowb5ozz/use_addon_1.png "図の表示 手順1")|
+|プロパティパネルを表示し、項目 *図形を表示* が追加されていることを確認します。|![図の表示 有効化](https://dl.dropboxusercontent.com/s/p2i0nhqt254zmyl/enable_addon.png "図の表示 有効化")|
 |---|---|
+
 
 <div id="space_s"></div>
 
@@ -69,7 +70,7 @@ OpenGLを使って図形の描画方法を理解するため、次の仕様の�
 
 <div id="process"></div>
 
-|<div id="box">1</div>|プロパティパネルの項目 *図形を表示* に配置されている *開始* ボタンをクリックすると、*3Dビュー* エリア上に三角形が表示されます。<br>また、プロパティパネルには表示する図形と図形の頂点の座標を変更するためのUIが表示されます。|![図の表示 手順2](https://dl.dropboxusercontent.com/s/056sg7b9x96mdjf/use_addon_2.png "図の表示 手順2")|
+|<div id="box">1</div>|プロパティパネルの項目 *図形を表示* に配置されている *開始* ボタンをクリックします。|![図の表示 手順1](https://dl.dropboxusercontent.com/s/uf0xneikowb5ozz/use_addon_1.png "図の表示 手順1")|
 |---|---|---|
 
 <div id="process_sep"></div>
@@ -78,7 +79,7 @@ OpenGLを使って図形の描画方法を理解するため、次の仕様の�
 
 <div id="process"></div>
 
-|<div id="box">2</div>|1で表示されたUIから頂点の座標を変更すると、*3Dビュー* エリア上に表示されている三角形が頂点の座標の変更に合わせて変形します。|![図の表示 手順3](https://dl.dropboxusercontent.com/s/vlua7b5aiptcc4m/use_addon_3.png "図の表示 手順3")|
+|<div id="box">2</div>|*3Dビュー* エリア上に三角形が表示されます。<br>また、プロパティパネルには表示する図形と図形の頂点の座標を変更するためのUIが表示されます。|![図の表示 手順2](https://dl.dropboxusercontent.com/s/056sg7b9x96mdjf/use_addon_2.png "図の表示 手順2")|
 |---|---|---|
 
 <div id="process_sep"></div>
@@ -87,7 +88,7 @@ OpenGLを使って図形の描画方法を理解するため、次の仕様の�
 
 <div id="process"></div>
 
-|<div id="box">3</div>|*図形* を *三角形* から *四角形* へ変更すると、プロパティパネルで4つの頂点座標を編集できるようになり、表示図形の変更と同時に *3Dビュー* エリア上に表示されている図形も変更されます。|![図の表示 手順4](https://dl.dropboxusercontent.com/s/1wr0l6uddp64emk/use_addon_4.png "図の表示 手順4")|
+|<div id="box">3</div>|2で表示されたUIから頂点の座標を変更すると、*3Dビュー* エリア上に表示されている三角形が頂点の座標の変更に合わせて変形します。|![図の表示 手順3](https://dl.dropboxusercontent.com/s/vlua7b5aiptcc4m/use_addon_3.png "図の表示 手順3")|
 |---|---|---|
 
 <div id="process_sep"></div>
@@ -96,8 +97,19 @@ OpenGLを使って図形の描画方法を理解するため、次の仕様の�
 
 <div id="process"></div>
 
-|<div id="box">4</div>|プロパティパネルの項目 *図形を表示* に配置されている *終了* ボタンをクリックすると、図形が描画されなくなります。||
+|<div id="box">4</div>|*図形* を *三角形* から *四角形* へ変更すると、プロパティパネルで4つの頂点座標を編集できるようになり、表示図形の変更と同時に *3Dビュー* エリア上に表示されている図形も変更されます。|![図の表示 手順4](https://dl.dropboxusercontent.com/s/1wr0l6uddp64emk/use_addon_4.png "図の表示 手順4")|
 |---|---|---|
+
+<div id="process_sep"></div>
+
+---
+
+<div id="process"></div>
+
+|<div id="box">5</div>|プロパティパネルの項目 *図形を表示* に配置されている *終了* ボタンをクリックすると、図形が描画されなくなります。|![図の表示 手順5](https://dl.dropboxusercontent.com/s/mwpts4pcq3ysqkq/use_addon_5.png "図の表示 手順5")|
+|---|---|---|
+
+
 
 <div id="process_start_end"></div>
 
@@ -125,6 +137,7 @@ OpenGLを使って図形の描画方法を理解するため、次の仕様の�
 本節のサンプルでは、図形を描画するためにBlenderが提供するOpenGLへアクセスするためのAPIを利用します。
 
 OpenGLへアクセスするためのAPIをアドオンから利用するためには、```bgl``` とよばれるモジュールをインポートする必要があります。
+
 
 [import:"import_bgl", unindent:"true"](../../sample_raw/src/chapter_03/sample_3_4.py)
 
@@ -209,9 +222,15 @@ OpenGLのプログラミングに慣れている方は、```RenderFigure.__rende
 
 続いて表示する図形の判定を行った後、```bgl.glBegin()``` 関数により図形描画を開始します。```bgl.glBegin()``` 関数の引数には描画モードを指定します。```bgl.GL_TRIANGLES``` を指定することで三角形の描画を、```bgl.GL_QUADS``` を指定することで四角形の描画を開始します。
 
-次に、```bgl.glColor4f()``` 関数を呼び出して図形の色を指定します。引数は順に赤(R)、緑(G)、青(B)、アルファ値(A)となります。今回はやや半透明の白色を描画色に設定しました。そして ```bgl.glVertex2f()``` 関数を呼んで図形の頂点の座標を設定した後に、```bgl.glEnd()``` 関数により描画を完了します。```bgl.glVertex2f()``` 関数の引数には、X座標、Y座標の順で浮動小数点値で座標を指定します。三角形の場合は3つの頂点を指定するため3回 ```bgl.glVertex2f()``` 関数を呼び、四角形の場合は4つの頂点を指定するため4回 ```bgl.glVertex2f()``` 関数を呼びます。座標値は、リージョンの左下が (x, y) = (0, 0) となることに注意が必要です。
+次に、```bgl.glColor4f()``` 関数を呼び出して図形の色を指定します。引数は順に赤(R)、緑(G)、青(B)、アルファ値(A)となります。今回はやや半透明の白色を描画色に設定しました。そして ```bgl.glVertex2f()``` 関数を呼んで図形の頂点の座標を設定した後に、```bgl.glEnd()``` 関数により描画を完了します。
 
-![リージョン座標](https://dl.dropboxusercontent.com/s/82lp8is114xb4hn/region_coordinate.png "リージョン座標")
+
+<div id="sidebyside"></div>
+
+
+|```bgl.glVertex2f()``` 関数の引数には、X座標、Y座標の順で浮動小数点値で座標を指定します。三角形の場合は3つの頂点を指定するため3回 ```bgl.glVertex2f()``` 関数を呼び、四角形の場合は4つの頂点を指定するため4回 ```bgl.glVertex2f()``` 関数を呼びます。座標値は、リージョンの左下が (x, y) = (0, 0) となることに注意が必要です。|![リージョン座標](https://dl.dropboxusercontent.com/s/82lp8is114xb4hn/region_coordinate.png "リージョン座標")|
+|---|---|
+
 
 最後に ```bgl.glDisable(bgl.GL_BLEND)``` 関数を呼び出し、```bgl.glBegin()``` 関数で有効化したOpenGLの設定を無効化する必要があります。無効化しないまま描画関数を終えてしまうと、OpenGLの設定がすべてのBlenderのUIに対して適用されてしまいます。他のOpenGLの設定についても同様ですので、覚えておいてください。
 
