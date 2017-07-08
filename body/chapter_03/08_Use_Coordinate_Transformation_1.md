@@ -1,5 +1,4 @@
-﻿D:\b\Introduction-to-Add-on-Development-in-Blender\body\chapter_03\08_Use_Coordinate_Transformation_1.md
-<div id="sect_title_img_3_8"></div>
+﻿<div id="sect_title_img_3_8"></div>
 
 <div id="sect_title_text"></div>
 
@@ -188,6 +187,9 @@ Blenderが提供するAPIの大半は ```bpy``` モジュールに含まれる�
 
 本節のサンプルでは、選択中のオブジェクトを移動した時に、オブジェクトの中心座標の軌跡を表示します。選択中のオブジェクトの軌跡を表示するのは、```DrawObjectTrajectory.__render()``` スタティックメソッドです。```DrawObjectTrajectory.__render()``` スタティックメソッドでは次の手順に従って、オブジェクトの軌跡を表示します。
 
+
+<div id="custom_ol"></div>
+
 1. オブジェクトの位置座標を取得する
 2. オブジェクトの位置座標をリージョン座標に変換する
 3. 古い位置情報を削除する
@@ -221,7 +223,7 @@ Blenderが提供するAPIの大半は ```bpy``` モジュールに含まれる�
 [import:"get_region_space", unindent:"true"](../../sample_raw/src/chapter_03/sample_3_8.py)
 
 
-```DrawObjectTrajectory.__get_region_space()``` スタティックメソッドは、引数 ```area_type``` で指定されたエリア上の、```region_type``` に指定されたリージョン情報を返すことに加え、引数 ```space_type``` に指定されたスペース情報も返します。エリア情報 ```area``` に関するスペース情報は ```area.spaces``` に保存されています。```s.type``` と引数 ```space_type``` を確認し、一致したものが必要とするスペース情報です。サンプルでは、*3Dビュー* エリアのウィンドウリージョンを座標変換対象とするため、```region_type``` が ```WINDOW``` であるリージョン情報と、```space_type``` が ```VIEW_3D``` であるスペース情報を取得します。
+```DrawObjectTrajectory.__get_region_space()``` スタティックメソッドは、引数 ```area_type``` で指定されたエリア上の、```region_type``` に指定されたリージョン情報を返すことに加え、引数 ```space_type``` に指定されたスペース情報も返します。エリア情報 ```area``` に関するスペース情報は ```area.spaces``` に保存されています。```s.type``` と引数 ```space_type``` を確認し、一致したものが必要とするスペース情報です。サンプルでは、*3Dビュー* エリアの *ウィンドウ* リージョンを座標変換対象とするため、```region_type``` が ```WINDOW``` であるリージョン情報と、```space_type``` が ```VIEW_3D``` であるスペース情報を取得します。
 
 
 ```DrawObjectTrajectory.__get_region_space()``` スタティックメソッドを呼び出して取得した情報を用いて、```view3d_utils.location_3d_to_region_2d()``` 関数を呼び出します。第1引数には取得したリージョン情報を、第2引数にはスペース情報の ```region_3d``` インスタンス変数を、第3引数にオブジェクトデータの ```location``` インスタンス変数を指定して呼び出すことで、第3引数に指定したオブジェクトの座標をリージョン座標に変換することができます。変換後のリージョン座標は ```view3d_utils.location_3d_to_region_2d()``` 関数の戻り値として取得できるため、これをクラス変数 ```DrawObjectTrajectory.__loc_history``` に保存します。なお、クラス変数 ```DrawObjectTrajectory.__loc_history``` はリストであり、この末尾に座標変換後の座標値を追加することで、リストの先頭が最も古い位置情報、末尾が最新の位置情報になります。

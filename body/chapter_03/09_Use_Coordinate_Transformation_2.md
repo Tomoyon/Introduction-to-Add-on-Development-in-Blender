@@ -1,4 +1,3 @@
-D:\b\Introduction-to-Add-on-Development-in-Blender\body\chapter_03\09_Use_Coordinate_Transformation_2.md
 <div id="sect_title_img_3_9"></div>
 
 <div id="sect_title_text"></div>
@@ -119,11 +118,15 @@ D:\b\Introduction-to-Add-on-Development-in-Blender\body\chapter_03\09_Use_Coordi
 
 マウスカーソルの位置に向けて発した、レイと交差するオブジェクトを選択するための手順を次に示します。
 
+
+<div id="custom_ol"></div>
+
 1. マウスカーソルのリージョン座標を取得する
 2. リージョン座標から、レイの向きとレイの発生源の座標を求める
 3. レイの始点と終点の座標を求める
 4. レイと *3Dビュー* エリアに配置されているオブジェクトとの交差判定を行う
 5. レイと交差したオブジェクトを選択する
+
 
 これらの処理は全て、```SelectObjectOnMouseover``` クラスの ```modal()``` メソッドで行います。
 
@@ -189,7 +192,7 @@ D:\b\Introduction-to-Add-on-Development-in-Blender\body\chapter_03\09_Use_Coordi
 本節のサンプルでは ```ray_cast()``` の処理を ```try``` ブロックで囲み、例外処理を行っています。これは、メッシュ型のオブジェクトを作成したときに、作成タイミングの問題で ```ray_cast()``` の処理を実行できずに例外が発生してしまう場合があるからです。このため、```ray_cast()``` の処理を ```try``` ブロックで囲んで、処理が中断してしまうことを回避しています。なお、この問題はタイミングによる問題であるため、常に発生するものではありませんが、安全面を重視してこのような例外処理を追加しています。
 
 
-<div id="tips"></div>
+<div id="column"></div>
 
 ここで紹介した、ray_cast()関数以外の他のAPIでも同じことですが、ray_cast()関数はBlenderのバージョン間で外部仕様が大きく変わっているようです。本書が対象とするバージョン2.75では、ray_cast()関数の戻り値はレイが交差した座標・面の法線・面のインデックスの3個でした。一方、バージョン2.77では、レイとオブジェクトとの交差結果（交差した場合はTrue）に加えて交差した座標・面の法線・面のインデックスなど6個の要素から構成されるタプルが、ray_cast()関数の戻り値になります。また、ray_cast()関数の引数についても、バージョン2.75ではレイの始点と終点の2個を指定するのに対し、2.77ではレイの原点と方向および長さの3個の引数を指定します。  
 このように、BlenderのバージョンによってAPIの外部仕様が変わることはよくあることで、アドオンのバグ報告の大半がBlender本体のバージョンに関係したものになっています。[4-1節](../chapter_04/01_Research_official_Blender_API_for_Add-on.md)を参考にして、アドオンの開発を行なっているバージョンのAPIの仕様を確認し、[2-1節](../chapter_02/01_Basic_of_Add-on_Development.md)で説明したサポート対象のBlenderのバージョンを正しく設定しましょう。  
@@ -265,10 +268,14 @@ for o in objs:
 
 リージョン情報とスペース情報を取得をしたあとは、次に示す順番で座標変換を行ないます。
 
+
+<div id="custom_ol"></div>
+
 1. 選択中の頂点のローカル座標を取得する
 2. ローカル座標からグローバル座標へ、座標変換する
 3. グローバル座標から射影座標へ、座標変換する
 4. 射影座標からリージョン座標へ、座標変換する
+
 
 ### 1. 選択中の頂点のローカル座標を取得する
 
@@ -310,7 +317,7 @@ for o in objs:
 
 [import:"transform_global_to_pers", unindent:"true"](../../sample_raw/src/chapter_03/transform_wo_view3d_utils.py)
 
-<div id="tips"></div>
+<div id="column"></div>
 
 space.region_3d.perspective_matrixは、space.region_3d.window_matrix * space.region_3d.view_matrixで求めることができます。
 

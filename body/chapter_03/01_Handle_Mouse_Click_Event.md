@@ -1,4 +1,3 @@
-D:\b\Introduction-to-Add-on-Development-in-Blender\body\chapter_03\01_Handle_Mouse_Click_Event.md
 <div id="sect_title_img_3_1"></div>
 
 <div id="sect_title_text"></div>
@@ -47,7 +46,8 @@ D:\b\Introduction-to-Add-on-Development-in-Blender\body\chapter_03\01_Handle_Mou
 
 ##### Work
 
-<div id="process_noimg"></div>
+
+<div id="process"></div>
 
 |<div id="box">1</div>|*3Dビュー* エリア上でモードを *編集モード* に変更し、選択方法を面選択に変更します。|![マウスの右クリックで面を削除 手順1](https://dl.dropboxusercontent.com/s/1glnrvwsysrjxcs/use_add-on_1.png "マウスの右クリックで面を削除 手順1")|
 |---|---|---|
@@ -129,7 +129,7 @@ D:\b\Introduction-to-Add-on-Development-in-Blender\body\chapter_03\01_Handle_Mou
 
 [import:"unregister_properties", unindent:"true"](../../sample_raw/src/chapter_03/sample_3_1.py)
 
-<div id="tips"></div>
+<div id="column"></div>
 
 本節のサンプルでは、bpy.types.PropertyGroupを使ってクラス間で共有するプロパティを定義しました。ここで、[2-9節](../chapter_02/09_Control_Blender_UI_2.md)で説明したツール・シェルフへのプロパティ追加時にも、bpy.types.PropertyGroupを使えるのではないかと思うかもしれません。しかし、layout.prop()に指定するのは「プロパティ変数名の文字列」であることから、グループ化してしまうと正しく動作しません。このため、プロパティをツール・シェルフやプロパティパネルに追加しない場合は、bpy.types.PropertyGroupを使ってプロパティをグループ化してよいです。しかし、プロパティをツール・シェルフやプロパティパネルに追加する場合は、bpy.types.PropertyGroupでグループ化せず、個別にプロパティを宣言する必要があります。
 
@@ -224,7 +224,7 @@ D:\b\Introduction-to-Add-on-Development-in-Blender\body\chapter_03\01_Handle_Mou
 
 右クリックされ、面を削除できると判断する処理について、説明します。
 
-面を削除できるか否かは、```if props.right_mouse_down is True and props.deleted is False``` によって判断しています。この処理には少し工夫を加えていますので、詳しく説明します。
+面を削除できるか否かは、```if props.right_mouse_down is True and props.deleted is False``` によって判断しています。この処理には少し工夫しているので、詳しく説明します。
 
 マウスが右クリックされたことを検出するためには、一見すると ```event.type``` が ```'RIGHTMOUSE'``` 、```event.value``` が ```'PRESS'``` であることを判定するだけで問題ないように思えます。しかし、右クリックされている状態でマウスカーソルを動させると、面を削除できてしまいます。これは、本来期待する動作（右クリックを行った直後の1回だけ面を削除）とは異なります。そこで、マウスを右クリックした後に1回でも面を削除した場合に ```Ture``` が設定される変数、```props.deleted``` が ```True``` である場合は、削除処理を行わないようにします。なお ```props.right_mouse_down``` は、便宜的に右クリックしたことを示すための変数です。
 
@@ -249,17 +249,19 @@ D:\b\Introduction-to-Add-on-Development-in-Blender\body\chapter_03\01_Handle_Mou
 
 次に、クリックされた面を削除する処理について説明します。クリックされた面を削除するためには、次のような3段階の処理を行う必要があります。
 
+
 <div id="custom_ol"></div>
 
 1. クリック時にマウスカーソルの位置にある面を選択
 2. 選択された面を取得
 3. 面を削除
 
+
 ##### 1. クリック時にマウスカーソルの位置にある面を選択
 
 [import:"select_clicked_face", unindent:"true"](../../sample_raw/src/chapter_03/sample_3_1.py)
 
-クリック時のマウスカーソルの位置は、```modal()``` メソッドの引数 ```event``` から取得できます。サンプルではクリック時のマウスカーソルのウィンドウリージョン座標が必要であるため、```event``` のメンバ変数 ```event.mouse_region_x``` （X座標）と ```event.mouse_region_y``` （Y座標）から取得しています。取得した座標は変数 ```loc``` に保存します。
+クリック時のマウスカーソルの位置は、```modal()``` メソッドの引数 ```event``` から取得できます。サンプルでは、クリック時のマウスカーソルの *ウィンドウ* リージョンのリージョン座標が必要であるため、```event``` のメンバ変数 ```event.mouse_region_x``` （X座標）と ```event.mouse_region_y``` （Y座標）から取得しています。取得した座標は変数 ```loc``` に保存します。
 
 次に面を選択するために ```bpy.ops.view3d.select()``` 関数を呼び出します。
 ```bpy.ops.view3d.select()``` 関数の引数 ```location``` にマウスクリック時のウインドウリージョン座標 ```loc``` を指定することで、マウスカーソルの位置にある面を選択することができます。もしマウスカーソルの位置に面が1つもなければ、```bpy.ops.view3d.select()``` 関数は ```{'PASS_THROUGH'}``` を返します。このため、```bpy.ops.view3d.select()``` 関数の戻り値 ```ret``` が ```{'PASS_THROUGH'}``` である場合は、マウスカーソルの位置に面がないことをコンソールウィンドウ出力したあとに処理を終了します。
@@ -300,7 +302,7 @@ D:\b\Introduction-to-Add-on-Development-in-Blender\body\chapter_03\01_Handle_Mou
 |```6```|```geom``` に面を指定した時は値に ```3``` を入力した時と同じ効果<br>辺を指定した時は値に ```4``` を入力した時と同じ効果<br>頂点を指定した時は値に ```1``` を入力した時と同じ効果|
 
 
-<div class="tips"></div>
+<div id="column"></div>
 
 Blender本体のソースコードを参照することで、contextに指定する値を調べることができます。対象となるソースコードは source/blender/bmesh/intern/bmesh_operator_api.h で、enum として値が定義されています。頂点の削除であれば、DEL_VERTS = 1 と書かれています。いずれにせよ、値を直に入力する方法は移植性が低いので、文字列などで入力できるようになることを期待します。
 
