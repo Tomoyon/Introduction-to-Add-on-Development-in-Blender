@@ -107,6 +107,9 @@
 [import:"import_blf", unindent:"true"](../../sample_raw/src/chapter_03/sample_3_5.py)
 
 
+<div id="space_m"></div>
+
+
 ### アドオン内で利用するプロパティを定義する
 
 複数のクラス間で共有するプロパティを次に示します。本節のサンプルでは、共有するプロパティが1つであるため ```bpy.types.PropertyGroup``` によるプロパティのグループ化を行っていません。
@@ -269,6 +272,9 @@ blf.shadow_offset() 関数の第2引数は画面右方向がX軸正方向、第3
 <div id="column"></div>
 
 描画関数内では、bglモジュールとblfモジュールが提供するAPIを同時に使用することができます。このため、描画関数を複数登録する必要はありません。
+
+
+<div id="space_s"></div>
 
 
 ### 描画関数の登録を解除する

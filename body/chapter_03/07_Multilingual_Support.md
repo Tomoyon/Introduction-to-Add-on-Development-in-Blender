@@ -38,6 +38,9 @@ Sample3-7: Enabled add-on 'Sample3-7'
 ```
 
 
+<div id="space_m"></div>
+
+
 ### アドオンの機能を使用する
 
 有効化したアドオンの機能を使い、動作を確認します。[3-1節](01_Handle_Mouse_Click_Event.md)と同じ機能を持つアドオンであるため、本節ではUIの言語を変えたときの動作確認方法の手順のみ説明します。
@@ -217,6 +220,9 @@ Blenderに設定されている現在のロケールを調べるためには、*
 なお、```bpy.app.translations.pgettext()``` を用いることで文字列の翻訳が完了しますが、次に示す処理のように文字列フォーマットによる文字列を翻訳する場合は、代わりに ```bpy.app.translations.pgettext_iface()``` を用いる必要があることに注意が必要です。
 
 [import:"translation_func_with_format", unindent:"true"](../../sample_raw/src/chapter_03/sample_3_7.py)
+
+
+<div id="space_m"></div>
 
 
 ## まとめ
